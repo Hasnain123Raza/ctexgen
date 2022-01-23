@@ -1,11 +1,20 @@
 noinst_LIBRARIES = markov/libmarkov.a parser/libparser.a serializer/libserializer.a
 
-markov_libmarkov_a_SOURCES = markov/src/markov.h markov/src/markov.c
+markov_libmarkov_a_SOURCES = markov/include/markov.h \
+    markov/src/markov.c
+markov_libmarkov_a_CPPFLAGS = -I$(top_srcdir)/markov/include \
+    -I$(top_srcdir)/markov/src
 
-parser_libparser_a_SOURCES = parser/src/parser.h parser/src/parser.c
+parser_libparser_a_SOURCES = parser/include/parser.h \
+    parser/src/parser.c
+parser_libparser_a_CPPFLAGS = -I$(top_srcdir)/parser/include \
+    -I$(top_srcdir)/parser/src
 
-serializer_libserializer_a_SOURCES = serializer/src/serializer.h serializer/src/serializer.c
-serializer_libserializer_a_CPPFLAGS = -I$(top_srcdir)/markov/src
+serializer_libserializer_a_SOURCES = serializer/include/serializer.h \
+    serializer/src/serializer.c
+serializer_libserializer_a_CPPFLAGS = -I$(top_srcdir)/serializer/include \
+    -I$(top_srcdir)/serializer/src \
+    -I$(top_srcdir)/markov/include
 
 bin_PROGRAMS = ctexgen
 ctexgen_SOURCES = cli/src/main.c \
@@ -13,9 +22,9 @@ ctexgen_SOURCES = cli/src/main.c \
     cli/src/argumentParser/argumentParser.h cli/src/argumentParser/argumentParser.c
 ctexgen_CPPFLAGS = -I$(top_srcdir)/cli/src \
     -I$(top_srcdir)/cli/src/argumentParser \
-    -I$(top_srcdir)/markov/src \
-    -I$(top_srcdir)/parser/src \
-    -I$(top_srcdir)/serializer/src
+    -I$(top_srcdir)/markov/include \
+    -I$(top_srcdir)/parser/include \
+    -I$(top_srcdir)/serializer/include
 ctexgen_LDADD = markov/libmarkov.a \
     parser/libparser.a \
     serializer/libserializer.a
