@@ -1,5 +1,7 @@
 #include "config.h"
 
+#include "argumentParser.h"
+
 #include "markov.h"
 #include "parser.h"
 #include "serializer.h"
@@ -8,11 +10,8 @@
 
 int main(int argc, char *argv[])
 {
-    printf("Hello, world from %s!\n", PACKAGE_NAME);
-
-    markovGreet();
-    parserGreet();
-    serializerGreet();
+    CLIConfigurations configurations;
+    parseArguments(argc, argv, &configurations);
 
     return 0;
 }

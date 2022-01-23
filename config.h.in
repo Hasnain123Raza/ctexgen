@@ -1,5 +1,20 @@
 /* config.h.in.  Generated from configure.ac by autoheader.  */
 
+/* The default input model name */
+#undef DEFAULT_INPUT_MODEL_NAME
+
+/* The default input text file */
+#undef DEFAULT_INPUT_TEXT_FILE
+
+/* The default output model name */
+#undef DEFAULT_OUTPUT_MODEL_NAME
+
+/* The default maximum length of text to generate */
+#undef DEFAULT_TEXT_LENGTH_MAX
+
+/* The default minimum length of text to generate */
+#undef DEFAULT_TEXT_LENGTH_MIN
+
 /* Name of package */
 #undef PACKAGE
 

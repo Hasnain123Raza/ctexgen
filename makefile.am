@@ -8,8 +8,11 @@ serializer_libserializer_a_SOURCES = serializer/src/serializer.h serializer/src/
 serializer_libserializer_a_CPPFLAGS = -I$(top_srcdir)/markov/src
 
 bin_PROGRAMS = ctexgen
-ctexgen_SOURCES = cli/src/main.c
+ctexgen_SOURCES = cli/src/main.c \
+    cli/src/cli.h \
+    cli/src/argumentParser/argumentParser.h cli/src/argumentParser/argumentParser.c
 ctexgen_CPPFLAGS = -I$(top_srcdir)/cli/src \
+    -I$(top_srcdir)/cli/src/argumentParser \
     -I$(top_srcdir)/markov/src \
     -I$(top_srcdir)/parser/src \
     -I$(top_srcdir)/serializer/src

@@ -10,4 +10,10 @@ AC_CONFIG_FILES([makefile])
 AC_PROG_CC
 AC_PROG_RANLIB
 
+AC_DEFINE([DEFAULT_INPUT_MODEL_NAME], ["model.mkv"], [The default input model name])
+AC_DEFINE([DEFAULT_OUTPUT_MODEL_NAME], ["model.mkv"], [The default output model name])
+AC_DEFINE([DEFAULT_INPUT_TEXT_FILE], ["input.txt"], [The default input text file])
+AC_DEFINE([DEFAULT_TEXT_LENGTH_MIN], ["64"], [The default minimum length of text to generate])
+AC_DEFINE([DEFAULT_TEXT_LENGTH_MAX], ["128"], [The default maximum length of text to generate])
+
 AC_OUTPUT

@@ -125,7 +125,8 @@ am_serializer_libserializer_a_OBJECTS =  \
 	serializer/src/libserializer_a-serializer.$(OBJEXT)
 serializer_libserializer_a_OBJECTS =  \
 	$(am_serializer_libserializer_a_OBJECTS)
-am_ctexgen_OBJECTS = cli/src/ctexgen-main.$(OBJEXT)
+am_ctexgen_OBJECTS = cli/src/ctexgen-main.$(OBJEXT) \
+	cli/src/argumentParser/ctexgen-argumentParser.$(OBJEXT)
 ctexgen_OBJECTS = $(am_ctexgen_OBJECTS)
 ctexgen_DEPENDENCIES = markov/libmarkov.a parser/libparser.a \
 	serializer/libserializer.a
@@ -145,6 +146,7 @@ DEFAULT_INCLUDES = -I.@am__isrc@
 depcomp = $(SHELL) $(top_srcdir)/build-aux/depcomp
 am__maybe_remake_depfiles = depfiles
 am__depfiles_remade = cli/src/$(DEPDIR)/ctexgen-main.Po \
+	cli/src/argumentParser/$(DEPDIR)/ctexgen-argumentParser.Po \
 	markov/src/$(DEPDIR)/markov.Po parser/src/$(DEPDIR)/parser.Po \
 	serializer/src/$(DEPDIR)/libserializer_a-serializer.Po
 am__mv = mv -f
@@ -311,8 +313,12 @@ markov_libmarkov_a_SOURCES = markov/src/markov.h markov/src/markov.c
 parser_libparser_a_SOURCES = parser/src/parser.h parser/src/parser.c
 serializer_libserializer_a_SOURCES = serializer/src/serializer.h serializer/src/serializer.c
 serializer_libserializer_a_CPPFLAGS = -I$(top_srcdir)/markov/src
-ctexgen_SOURCES = cli/src/main.c
+ctexgen_SOURCES = cli/src/main.c \
+    cli/src/cli.h \
+    cli/src/argumentParser/argumentParser.h cli/src/argumentParser/argumentParser.c
+
 ctexgen_CPPFLAGS = -I$(top_srcdir)/cli/src \
+    -I$(top_srcdir)/cli/src/argumentParser \
     -I$(top_srcdir)/markov/src \
     -I$(top_srcdir)/parser/src \
     -I$(top_srcdir)/serializer/src
@@ -476,6 +482,15 @@ cli/src/$(DEPDIR)/$(am__dirstamp):
 	@: > cli/src/$(DEPDIR)/$(am__dirstamp)
 cli/src/ctexgen-main.$(OBJEXT): cli/src/$(am__dirstamp) \
 	cli/src/$(DEPDIR)/$(am__dirstamp)
+cli/src/argumentParser/$(am__dirstamp):
+	@$(MKDIR_P) cli/src/argumentParser
+	@: > cli/src/argumentParser/$(am__dirstamp)
+cli/src/argumentParser/$(DEPDIR)/$(am__dirstamp):
+	@$(MKDIR_P) cli/src/argumentParser/$(DEPDIR)
+	@: > cli/src/argumentParser/$(DEPDIR)/$(am__dirstamp)
+cli/src/argumentParser/ctexgen-argumentParser.$(OBJEXT):  \
+	cli/src/argumentParser/$(am__dirstamp) \
+	cli/src/argumentParser/$(DEPDIR)/$(am__dirstamp)
 
 ctexgen$(EXEEXT): $(ctexgen_OBJECTS) $(ctexgen_DEPENDENCIES) $(EXTRA_ctexgen_DEPENDENCIES) 
 	@rm -f ctexgen$(EXEEXT)
@@ -484,6 +499,7 @@ ctexgen$(EXEEXT): $(ctexgen_OBJECTS) $(ctexgen_DEPENDENCIES) $(EXTRA_ctexgen_DEP
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
 	-rm -f cli/src/*.$(OBJEXT)
+	-rm -f cli/src/argumentParser/*.$(OBJEXT)
 	-rm -f markov/src/*.$(OBJEXT)
 	-rm -f parser/src/*.$(OBJEXT)
 	-rm -f serializer/src/*.$(OBJEXT)
@@ -492,6 +508,7 @@ distclean-compile:
 	-rm -f *.tab.c
 
 @AMDEP_TRUE@@am__include@ @am__quote@cli/src/$(DEPDIR)/ctexgen-main.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@cli/src/argumentParser/$(DEPDIR)/ctexgen-argumentParser.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@markov/src/$(DEPDIR)/markov.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@parser/src/$(DEPDIR)/parser.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@serializer/src/$(DEPDIR)/libserializer_a-serializer.Po@am__quote@ # am--include-marker
@@ -545,6 +562,20 @@ cli/src/ctexgen-main.obj: cli/src/main.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='cli/src/main.c' object='cli/src/ctexgen-main.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(ctexgen_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o cli/src/ctexgen-main.obj `if test -f 'cli/src/main.c'; then $(CYGPATH_W) 'cli/src/main.c'; else $(CYGPATH_W) '$(srcdir)/cli/src/main.c'; fi`
+
+cli/src/argumentParser/ctexgen-argumentParser.o: cli/src/argumentParser/argumentParser.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(ctexgen_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT cli/src/argumentParser/ctexgen-argumentParser.o -MD -MP -MF cli/src/argumentParser/$(DEPDIR)/ctexgen-argumentParser.Tpo -c -o cli/src/argumentParser/ctexgen-argumentParser.o `test -f 'cli/src/argumentParser/argumentParser.c' || echo '$(srcdir)/'`cli/src/argumentParser/argumentParser.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) cli/src/argumentParser/$(DEPDIR)/ctexgen-argumentParser.Tpo cli/src/argumentParser/$(DEPDIR)/ctexgen-argumentParser.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='cli/src/argumentParser/argumentParser.c' object='cli/src/argumentParser/ctexgen-argumentParser.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(ctexgen_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o cli/src/argumentParser/ctexgen-argumentParser.o `test -f 'cli/src/argumentParser/argumentParser.c' || echo '$(srcdir)/'`cli/src/argumentParser/argumentParser.c
+
+cli/src/argumentParser/ctexgen-argumentParser.obj: cli/src/argumentParser/argumentParser.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(ctexgen_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT cli/src/argumentParser/ctexgen-argumentParser.obj -MD -MP -MF cli/src/argumentParser/$(DEPDIR)/ctexgen-argumentParser.Tpo -c -o cli/src/argumentParser/ctexgen-argumentParser.obj `if test -f 'cli/src/argumentParser/argumentParser.c'; then $(CYGPATH_W) 'cli/src/argumentParser/argumentParser.c'; else $(CYGPATH_W) '$(srcdir)/cli/src/argumentParser/argumentParser.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) cli/src/argumentParser/$(DEPDIR)/ctexgen-argumentParser.Tpo cli/src/argumentParser/$(DEPDIR)/ctexgen-argumentParser.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='cli/src/argumentParser/argumentParser.c' object='cli/src/argumentParser/ctexgen-argumentParser.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(ctexgen_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o cli/src/argumentParser/ctexgen-argumentParser.obj `if test -f 'cli/src/argumentParser/argumentParser.c'; then $(CYGPATH_W) 'cli/src/argumentParser/argumentParser.c'; else $(CYGPATH_W) '$(srcdir)/cli/src/argumentParser/argumentParser.c'; fi`
 
 ID: $(am__tagged_files)
 	$(am__define_uniq_tagged_files); mkid -fID $$unique
@@ -806,6 +837,8 @@ distclean-generic:
 	-test . = "$(srcdir)" || test -z "$(CONFIG_CLEAN_VPATH_FILES)" || rm -f $(CONFIG_CLEAN_VPATH_FILES)
 	-rm -f cli/src/$(DEPDIR)/$(am__dirstamp)
 	-rm -f cli/src/$(am__dirstamp)
+	-rm -f cli/src/argumentParser/$(DEPDIR)/$(am__dirstamp)
+	-rm -f cli/src/argumentParser/$(am__dirstamp)
 	-rm -f markov/$(am__dirstamp)
 	-rm -f markov/src/$(DEPDIR)/$(am__dirstamp)
 	-rm -f markov/src/$(am__dirstamp)
@@ -827,6 +860,7 @@ clean-am: clean-binPROGRAMS clean-generic clean-noinstLIBRARIES \
 distclean: distclean-am
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
 		-rm -f cli/src/$(DEPDIR)/ctexgen-main.Po
+	-rm -f cli/src/argumentParser/$(DEPDIR)/ctexgen-argumentParser.Po
 	-rm -f markov/src/$(DEPDIR)/markov.Po
 	-rm -f parser/src/$(DEPDIR)/parser.Po
 	-rm -f serializer/src/$(DEPDIR)/libserializer_a-serializer.Po
@@ -878,6 +912,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
 	-rm -rf $(top_srcdir)/autom4te.cache
 		-rm -f cli/src/$(DEPDIR)/ctexgen-main.Po
+	-rm -f cli/src/argumentParser/$(DEPDIR)/ctexgen-argumentParser.Po
 	-rm -f markov/src/$(DEPDIR)/markov.Po
 	-rm -f parser/src/$(DEPDIR)/parser.Po
 	-rm -f serializer/src/$(DEPDIR)/libserializer_a-serializer.Po

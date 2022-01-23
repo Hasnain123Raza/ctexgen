@@ -3544,6 +3544,22 @@ else
 fi
 
 
+
+$as_echo "#define DEFAULT_INPUT_MODEL_NAME \"model.mkv\"" >>confdefs.h
+
+
+$as_echo "#define DEFAULT_OUTPUT_MODEL_NAME \"model.mkv\"" >>confdefs.h
+
+
+$as_echo "#define DEFAULT_INPUT_TEXT_FILE \"input.txt\"" >>confdefs.h
+
+
+$as_echo "#define DEFAULT_TEXT_LENGTH_MIN \"64\"" >>confdefs.h
+
+
+$as_echo "#define DEFAULT_TEXT_LENGTH_MAX \"128\"" >>confdefs.h
+
+
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
 # tests run on this system so they can be shared between configure
