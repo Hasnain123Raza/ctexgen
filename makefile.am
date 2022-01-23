@@ -1,0 +1,18 @@
+noinst_LIBRARIES = markov/libmarkov.a parser/libparser.a serializer/libserializer.a
+
+markov_libmarkov_a_SOURCES = markov/src/markov.h markov/src/markov.c
+
+parser_libparser_a_SOURCES = parser/src/parser.h parser/src/parser.c
+
+serializer_libserializer_a_SOURCES = serializer/src/serializer.h serializer/src/serializer.c
+serializer_libserializer_a_CPPFLAGS = -I$(top_srcdir)/markov/src
+
+bin_PROGRAMS = ctexgen
+ctexgen_SOURCES = cli/src/main.c
+ctexgen_CPPFLAGS = -I$(top_srcdir)/cli/src \
+    -I$(top_srcdir)/markov/src \
+    -I$(top_srcdir)/parser/src \
+    -I$(top_srcdir)/serializer/src
+ctexgen_LDADD = markov/libmarkov.a \
+    parser/libparser.a \
+    serializer/libserializer.a
